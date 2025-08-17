@@ -1,6 +1,5 @@
 {
   "name": "tailwindcss-colors-palette",
-  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev:lib": "pnpm --filter tailwindcss-colors-palette dev",

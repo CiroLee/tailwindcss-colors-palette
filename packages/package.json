@@ -1,16 +1,37 @@
 {
   "name": "tailwindcss-colors-palette",
-  "version": "0.0.1-beta",
+  "version": "0.0.1-beta.2",
+  "description": "A comprehensive color palette plugin for Tailwind CSS 4, providing easy-to-use color schemes",
   "type": "module",
   "main": "dist/index.css",
   "style": "dist/index.css",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
     ".": "./dist/index.css",
     "./colors/ant.css": "./dist/colors/ant.css",
     "./colors/universal.css": "./dist/colors/universal.css"
+  },
+  "keywords": [
+    "tailwindcss",
+    "tailwindcss4",
+    "color-palette",
+    "css",
+    "design-system",
+    "colors"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/tailwindcss-colors-palette.git"
+  },
+  "homepage": "https://github.com/yourusername/tailwindcss-colors-palette#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/tailwindcss-colors-palette/issues"
   },
   "scripts": {
     "clean": "rm -rf dist",
