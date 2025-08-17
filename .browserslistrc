@@ -1,0 +1,5 @@
+defaults
+not IE 11
+last 2 versions
+iOS >= 12
+Safari >= 12

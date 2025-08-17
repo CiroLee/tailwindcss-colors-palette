@@ -1,0 +1,28 @@
+{
+  "name": "tailwindcss-colors-palette",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev:lib": "pnpm --filter tailwindcss-colors-palette dev",
+    "dev:app": "pnpm --filter app dev",
+    "build:lib": "pnpm --filter tailwindcss-colors-palette build",
+    "build:app": "npm run build:lib && pnpm --filter app build",
+    "prepare": "husky"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.33.0",
+    "commitlint": "^19.8.1",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react": "^7",
+    "typescript-eslint":"8.39.1",
+    "lint-staged": "^16.1.5"
+  }
+}
