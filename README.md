@@ -11,14 +11,14 @@ npm install tailwindcss-colors-palette
 import plugin at your entry css file(e.g `src/index.css`).   
 
 on-demand import(Recommend)    
-```css
+```bash
 # index.css
 @import "tailwindcss";
 # import universal color palette
 @import "tailwindcss-colors-palette/colors/universal.css";
 ```
 full import     
-```css
+```bash
 # index.css
 @import "tailwindcss";
 @import "tailwindcss-colors-palette";
