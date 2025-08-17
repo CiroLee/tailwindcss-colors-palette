@@ -1,5 +1,6 @@
 {
   "name": "tailwindcss-colors-palette",
+  "version": "0.0.1-beta",
   "type": "module",
   "main": "dist/index.css",
   "style": "dist/index.css",
