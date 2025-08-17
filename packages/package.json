@@ -1,7 +1,7 @@
 {
   "name": "tailwindcss-colors-palette",
-  "version": "0.0.1-beta.2",
-  "description": "A comprehensive color palette plugin for Tailwind CSS 4, providing easy-to-use color schemes",
+  "version": "0.0.1-beta.3",
+  "description": "A comprehensive color palette plugin for Tailwind CSS 4, providing easy-to-use color palettes",
   "type": "module",
   "main": "dist/index.css",
   "style": "dist/index.css",
@@ -23,7 +23,7 @@
     "design-system",
     "colors"
   ],
-  "author": "Your Name",
+  "author": "CiroLee <ciromail@126.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -35,10 +35,10 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build:colors": "pnpm run clean && node build-colors.js",
+    "prebuild": "node prebuild.js",
+    "build:colors": "pnpm run clean && pnpm run prebuild && node build-colors.js",
     "build": "pnpm run build:colors",
-    "dev": "node dev-colors.js --watch",
-    "dev:build": "node dev-colors.js"
+    "dev": "node dev-colors.js --watch"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"
