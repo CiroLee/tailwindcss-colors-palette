@@ -1,2 +1,8 @@
 @import 'tailwindcss';
-@import 'tailwindcss-colors-palette/packages/dist/index.css';
+@import 'tailwindcss-colors-palette';
+
+@layer base {
+  body {
+    @apply text-white;
+  }
+}

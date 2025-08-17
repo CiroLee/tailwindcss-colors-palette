@@ -15,13 +15,13 @@ on-demand import(Recommend)
 // index.css
 @import "tailwindcss";
 # import universal color palette
-+ @import "tailwindcss-colors-palette/colors/universal.css";
+@import "tailwindcss-colors-palette/colors/universal.css";
 ```
 full import     
 ```diff
 // index.css
 @import "tailwindcss";
-+ @import "tailwindcss-colors-palette";
+@import "tailwindcss-colors-palette";
 ```
 
 ## Development     
