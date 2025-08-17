@@ -1,6 +1,6 @@
 # tailwindcss-colors-palette
 
-A comprehensive color palette plugin for Tailwind CSS 4, providing easy-to-use color palettes.
+A color palette plugin for Tailwind CSS 4, providing easy-to-use color palettes for your projects.
 
 ## Installation
 ```bash
