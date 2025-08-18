@@ -5,10 +5,80 @@ import { execSync } from 'child_process';
 import chokidar from 'chokidar';
 
 const colorsDir = path.resolve('./src/colors');
-const distDir = path.resolve('./dist/colors');
+const distDir = path.resolve('./dist/colors');// TypeScript转换目录
+const targetDirInApp = path.resolve('../app/src/config/colors');
+
+// 确保目标目录存在
+if (!fs.existsSync(targetDirInApp)) {
+  fs.mkdirSync(targetDirInApp, { recursive: true });
+}
 
 // 确保dist目录存在
 if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
+
+// ===== CSS到TypeScript转换功能 =====
+
+// 读取并转换CSS文件为TypeScript对象
+const convertCssToTs = (cssFilePath, tsFilePath) => {
+  const cssContent = fs.readFileSync(cssFilePath, 'utf-8');
+
+  // 使用正则表达式匹配CSS变量
+  const variableRegex = /--color-([^:]+):\s*([^;]+);/g;
+  const colorObject = {};
+
+  let match;
+  while ((match = variableRegex.exec(cssContent)) !== null) {
+    const key = match[1].trim();
+    const value = match[2].trim();
+    colorObject[key] = value;
+  }
+
+  // 从文件名获取变量名（首字母大写）
+  const fileName = path.basename(tsFilePath, '.ts');
+  const variableName = fileName.charAt(0) + fileName.slice(1) + 'Colors';
+  const typeName = fileName.charAt(0) + fileName.slice(1) + 'ColorKeys';
+
+  // 生成TypeScript内容
+  const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;
+
+export type ${typeName} = keyof typeof ${variableName};`;
+
+  // 写入TypeScript文件
+  fs.writeFileSync(tsFilePath, tsContent, 'utf-8');
+  console.log(`🎯 已生成: ${tsFilePath} (${variableName})`);
+};
+
+// 处理所有CSS文件的TypeScript转换
+const processAllCssToTs = () => {
+  const cssFiles = fs.readdirSync(colorsDir).filter((file) => file.endsWith('.css'));
+
+  cssFiles.forEach((cssFile) => {
+    const baseName = path.basename(cssFile, '.css');
+    const cssFilePath = path.join(colorsDir, cssFile);
+
+    // 只在app目录下的config目录中生成同名ts文件
+    const tsFilePathInApp = path.join(targetDirInApp, `${baseName}.ts`);
+
+    // 转换并生成ts文件
+    convertCssToTs(cssFilePath, tsFilePathInApp);
+  });
+};
+
+// 处理单个CSS文件的TypeScript转换
+const convertSingleCssToTs = (fileName) => {
+  const baseName = path.basename(fileName, '.css');
+  const cssFilePath = path.join(colorsDir, fileName);
+  
+  if (!fs.existsSync(cssFilePath)) return;
+  
+  // 只在app目录下的config目录中生成同名ts文件
+  const tsFilePathInApp = path.join(targetDirInApp, `${baseName}.ts`);
+  
+  // 转换并生成ts文件
+  convertCssToTs(cssFilePath, tsFilePathInApp);
+};
+
+// ===== 原有功能 =====
 
 // 获取所有色板文件
 const getThemeFiles = () => {
@@ -139,6 +209,11 @@ const initialBuild = () => {
     successCount++;
   }
   
+  // 执行TypeScript转换
+  console.log('\n🔄 开始转换CSS文件到TypeScript对象...');
+  processAllCssToTs();
+  console.log('🎉 TypeScript文件转换完成！');
+  
   console.log(`\n🎉 Built ${successCount}/${themeFiles.length + 1} files`);
 };
 
@@ -166,12 +241,14 @@ const startWatching = () => {
     console.log(`\n📝 ${fileName} changed`);
     buildThemeFile(fileName);
     buildMainIndex(); // 重新构建主入口文件
+    convertSingleCssToTs(fileName); // 转换TypeScript
   });
   
   // 主入口文件变化处理
   mainWatcher.on('change', () => {
     console.log('\n📝 index.css changed');
     buildMainIndex();
+    processAllCssToTs(); // 重新转换所有TypeScript文件
   });
   
   // 新增文件处理
@@ -181,6 +258,7 @@ const startWatching = () => {
       console.log(`\n➕ ${fileName} added`);
       buildThemeFile(fileName);
       buildMainIndex(); // 重新构建主入口文件
+      convertSingleCssToTs(fileName); // 转换TypeScript
     }
   });
   
@@ -193,6 +271,15 @@ const startWatching = () => {
     const distFilePath = path.join(distDir, fileName);
     if (fs.existsSync(distFilePath)) {
       fs.unlinkSync(distFilePath);
+    }
+    
+    // 删除对应的TypeScript文件
+    const baseName = path.basename(fileName, '.css');
+    const tsFilePathInApp = path.join(targetDirInApp, `${baseName}.ts`);
+    
+    if (fs.existsSync(tsFilePathInApp)) {
+      fs.unlinkSync(tsFilePathInApp);
+      console.log(`🗑️  已删除: ${tsFilePathInApp}`);
     }
     
     buildMainIndex(); // 重新构建主入口文件

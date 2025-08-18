@@ -1,4 +1,5 @@
 /* eslint-env node */
+// 同步 README.md 和 LICENSE
 import fs from 'fs';
 import path from 'path';
 

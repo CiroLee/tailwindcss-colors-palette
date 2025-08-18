@@ -35,8 +35,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
+    "convert": "node convert-colors-to-ts.js",
     "prebuild": "node prebuild.js",
-    "build:colors": "pnpm run clean && pnpm run prebuild && node build-colors.js",
+    "build:colors": "pnpm run clean && pnpm run prebuild && pnpm run convert && node build-colors.js",
     "build": "pnpm run build:colors",
     "dev": "node dev-colors.js --watch"
   },
