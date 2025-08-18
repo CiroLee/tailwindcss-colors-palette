@@ -5,5 +5,5 @@
       "destination": "/"
     }
   ],
-  "outputDirectory": "app/.next"
+  "outputDirectory": "app/out"
 }
