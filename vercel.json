@@ -1,8 +1,9 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/:path*",
+      "destination": "/:path*"
     }
-  ]
+  ],
+  "outputDirectory": "app/.next"
 }
