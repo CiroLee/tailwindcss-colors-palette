@@ -29,13 +29,14 @@ export default function Page() {
         className="mt-8 [&_pre]:w-full"
         title="Installation"
       />
-      <CodeContainer lang="ts" code={usageCode} title="Usage" className="mt-8" />
+      <CodeContainer lang="ts" code={usageCode} title="Usage" className="mt-8 [&_pre]:w-fit md:[&_pre]:w-full" />
       <Heading as="h3" className="mt-20 mb-4 text-center">
         Palettes
       </Heading>
       <div className="mx-auto grid gap-4 px-4 pb-20 md:grid-cols-4 lg:max-w-6xl">
-        <PaletteCard paletteName="universal" brandName="Universal" middle="5" gradient={[0, 12]} />
-        <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradient={[1, 10]} />
+        <PaletteCard paletteName="universal" brandName="Universal" middle="5" gradientLength={12} />
+        <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradientLength={9} />
+        <PaletteCard paletteName="chakra" brandName="Chakra" middle="500" gradientLength={10} />
       </div>
       <div
         className="fixed inset-0 -z-1"

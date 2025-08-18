@@ -7,11 +7,13 @@ interface PaletteCardProps {
   paletteName: string;
   brandName?: string;
   middle: string;
-  gradient: [number, number];
+  gradientLength: number;
   onClick?: (paletteName: string, brandName?: string) => void;
 }
 
-export default function PaletteCard({ paletteName, brandName, middle, gradient, onClick }: PaletteCardProps) {
+const minBlockNum = 12;
+
+export default function PaletteCard({ paletteName, brandName, middle, gradientLength, onClick }: PaletteCardProps) {
   const name = paletteName + 'Colors';
   const colorPalette = colors[name as keyof typeof colors];
   const pickColor = useCallback(() => {
@@ -21,7 +23,13 @@ export default function PaletteCard({ paletteName, brandName, middle, gradient, 
         colorsArr.push(colorPalette[color as keyof typeof colorPalette]);
       }
     }
-
+    // 如果不足12个，从末尾挑选补充
+    if (colorsArr.length < minBlockNum) {
+      const diff = minBlockNum - colorsArr.length;
+      for (let i = Object.values(colorPalette).length; i > diff; i -= 3) {
+        colorsArr.push(Object.values(colorPalette)[i]);
+      }
+    }
     return colorsArr;
   }, [middle, colorPalette]);
   return (
@@ -37,7 +45,7 @@ export default function PaletteCard({ paletteName, brandName, middle, gradient, 
           <PaletteDialog
             title={brandName}
             color={colorPalette}
-            gradient={gradient}
+            gradientLength={gradientLength}
             trigger={
               <button
                 className="h-8 cursor-pointer rounded-full bg-black/40 px-3 backdrop-blur-2xl transition-opacity group-hover:opacity-100 md:opacity-0"

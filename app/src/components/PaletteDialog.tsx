@@ -9,14 +9,21 @@ interface PaletteDialogProps extends React.ComponentPropsWithRef<typeof DialogPr
   title?: string;
   color: Record<string, string>;
   trigger?: React.ReactNode;
-  gradient: [number, number];
+  gradientLength: number;
 }
 
 const content = cn(
   `data-[state=open]:animate-scale-in data-[state=closed]:animate-scale-out fixed top-1/2 left-1/2 origin-center -translate-1/2 rounded-md border border-neutral-800 
   bg-neutral-900 p-3 w-[calc(100vw_-_var(--spacing)*2)] md:w-[90%] md:max-w-200 overflow-auto`,
 );
-export default function PaletteDialog({ className, trigger, title, color, gradient, ...props }: PaletteDialogProps) {
+export default function PaletteDialog({
+  className,
+  trigger,
+  title,
+  color,
+  gradientLength,
+  ...props
+}: PaletteDialogProps) {
   const { xTitles, yColors } = parseColor(color);
   const [open, setOpen] = useState(false);
 
@@ -48,7 +55,7 @@ export default function PaletteDialog({ className, trigger, title, color, gradie
             <div className="flex-1">
               <div
                 className="mb-0.5 grid"
-                style={{ gridTemplateColumns: `repeat(${gradient[1] - gradient[0] + 1}, minmax(0, 1fr))` }}>
+                style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
                 {xTitles.map((t) => (
                   <div className="flex justify-center text-sm" key={t}>
                     {t}
@@ -57,7 +64,7 @@ export default function PaletteDialog({ className, trigger, title, color, gradie
               </div>
               <div
                 className="grid gap-1"
-                style={{ gridTemplateColumns: `repeat(${gradient[1] - gradient[0] + 1}, minmax(0, 1fr))` }}>
+                style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
                 {Object.entries(color).map(([k, v]) => (
                   <button
                     key={k}

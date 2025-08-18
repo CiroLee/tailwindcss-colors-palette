@@ -40,3 +40,10 @@ npm run build:lib
 # build app
 npm run build:app
 ```
+
+## Support Colors
+| Name           | Link                                                           | Status      |
+| -------------- | -------------------------------------------------------------- | ----------- |
+| universal      | [colar](https://github.com/fchristant/colar)                   | ✅ Completed |
+| ant design(v5) | [ant design](https://ant-design.antgroup.com/docs/spec/colors) | ✅ Completed |
+| Chakra         | [chakra](https://chakra-ui.com/docs/theming/colors)            | ✅ Completed |

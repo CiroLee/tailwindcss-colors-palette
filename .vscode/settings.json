@@ -26,5 +26,10 @@
   "prettier.configPath": "",
   "prettier.useEditorConfig": false,
   "prettier.requireConfig": true,
-  "cSpell.words": ["sonner"]
+  "cSpell.words": [
+    "sonner"
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
 }

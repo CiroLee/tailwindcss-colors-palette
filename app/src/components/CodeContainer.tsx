@@ -13,7 +13,7 @@ export default function CodeContainer({ className, code, lang, title }: CodeCont
   return (
     <div
       className={cn(
-        'mx-auto w-[calc(100vw_-_var(--spacing)*4)] md:w-[60%] md:max-w-2xl [&_pre]:w-fit md:[&_pre]:w-auto',
+        'mx-auto w-[calc(100vw_-_var(--spacing)*4)] md:max-w-2xl lg:w-[60%] lg:max-w-3xl [&_pre]:w-fit md:[&_pre]:w-auto',
         className,
       )}>
       <Heading as="h5" className="mb-2">
