@@ -17,7 +17,7 @@ export default function Page() {
           <Image src="/icons/github.svg" width={24} height={24} className="z-1 size-5" alt="github" />
         </Link>
       </nav>
-      <Heading as="h1" className="text-uni-blue-0 mt-20 mb-4 text-center">
+      <Heading as="h1" className="mt-20 mb-4 text-center">
         tailwindcss-colors-palette
       </Heading>
       <p className="px-4 text-center text-sm text-neutral-400">

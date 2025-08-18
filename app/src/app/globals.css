@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tailwindcss-colors-palette/colors/universal.css';
 
 @layer base {
   body {

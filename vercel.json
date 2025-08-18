@@ -5,5 +5,11 @@
       "destination": "/"
     }
   ],
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "*": false
+    }
+  },
   "outputDirectory": "app/out"
 }
