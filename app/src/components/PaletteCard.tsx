@@ -23,7 +23,7 @@ export default function PaletteCard({ paletteName, brandName, middle, gradient, 
     }
 
     return colorsArr;
-  }, []);
+  }, [middle, colorPalette]);
   return (
     <div
       className={cn(
