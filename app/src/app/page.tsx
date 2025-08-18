@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen">
       <nav className="fixed top-0 left-0 z-10 flex h-14 w-full items-center justify-end px-4">
         <Link
           href="https://github.com/CiroLee/tailwindcss-colors-palette"
