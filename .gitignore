@@ -3,3 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
+packages/README.md
+packages/LICENSE
