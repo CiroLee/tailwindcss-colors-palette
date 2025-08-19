@@ -5,10 +5,6 @@ interface Props {
   code: string;
   lang?: BundledLanguage;
   className?: string;
-  highlightLines?: number[];
-  highlightRange?: number[][];
-  diffAddLines?: number[];
-  diffRemoveLines?: number[];
 }
 
 export default async function CodeBox({ code, lang = 'tsx', className }: Props) {
