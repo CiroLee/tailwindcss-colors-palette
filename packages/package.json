@@ -14,7 +14,8 @@
     ".": "./dist/index.css",
     "./colors/ant.css": "./dist/colors/ant.css",
     "./colors/universal.css": "./dist/colors/universal.css",
-    "./colors/chakra.css": "./dist/colors/chakra.css"
+    "./colors/chakra.css": "./dist/colors/chakra.css",
+    "./colors/material.css": "./dist/colors/material.css"
   },
   "keywords": [
     "tailwindcss",

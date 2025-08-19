@@ -45,6 +45,7 @@ export default function Page() {
         <PaletteCard paletteName="universal" brandName="Universal" middle="5" gradientLength={12} />
         <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradientLength={9} />
         <PaletteCard paletteName="chakra" brandName="Chakra" middle="500" gradientLength={10} />
+        <PaletteCard paletteName="material" brandName="Material" middle="600" gradientLength={13} />
       </div>
       <div
         className="fixed inset-0 -z-1"

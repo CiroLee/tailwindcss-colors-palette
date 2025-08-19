@@ -48,7 +48,7 @@ export default function PaletteCard({ paletteName, brandName, middle, gradientLe
             gradientLength={gradientLength}
             trigger={
               <button
-                className="h-8 cursor-pointer rounded-full bg-black/40 px-3 backdrop-blur-2xl transition-opacity group-hover:opacity-100 md:opacity-0"
+                className="h-8 cursor-pointer rounded-full bg-black/40 px-4 backdrop-blur-2xl transition-opacity group-hover:opacity-100 md:opacity-0"
                 onClick={() => onClick?.(paletteName, brandName)}>
                 View
               </button>
