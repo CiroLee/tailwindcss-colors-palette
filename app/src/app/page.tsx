@@ -1,7 +1,7 @@
 import CodeContainer from '@/components/CodeContainer';
 import PaletteCard from '@/components/PaletteCard';
 import Heading from '@/components/ui/Heading';
-import { usageCode } from '@/config/code.config';
+import { usageCode, useInComponent } from '@/config/code.config';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -28,8 +28,16 @@ export default function Page() {
         code="npm install tailwindcss-colors-palette"
         className="mt-8 [&_pre]:w-full"
         title="Installation"
+        showCopy
       />
-      <CodeContainer lang="ts" code={usageCode} title="Usage" className="mt-8 [&_pre]:w-fit md:[&_pre]:w-full" />
+      <CodeContainer
+        lang="css"
+        code={usageCode}
+        title="Usage"
+        description="import the plugin in your main css file(e.g index.css). You can import the color palette you want as needed, or you can import all the color palettes."
+        className="mt-8 [&_pre]:w-fit md:[&_pre]:w-full"
+      />
+      <CodeContainer lang="tsx" code={useInComponent} className="mt-3" />
       <Heading as="h3" className="mt-20 mb-4 text-center">
         Palettes
       </Heading>

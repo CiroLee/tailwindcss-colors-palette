@@ -13,8 +13,8 @@ interface PaletteDialogProps extends React.ComponentPropsWithRef<typeof DialogPr
 }
 
 const content = cn(
-  `data-[state=open]:animate-scale-in data-[state=closed]:animate-scale-out fixed top-1/2 left-1/2 origin-center -translate-1/2 rounded-md border border-neutral-800 
-  bg-neutral-900 p-3 w-[calc(100vw_-_var(--spacing)*2)] md:w-[90%] md:max-w-200 overflow-auto`,
+  `relative data-[state=open]:animate-scale-in data-[state=closed]:animate-scale-out fixed top-1/2 left-1/2 origin-center -translate-1/2 rounded-md border border-neutral-800 
+  bg-neutral-900 p-3 w-[calc(100vw_-_var(--spacing)*2)] md:w-[90%] md:max-w-220 overflow-hidden z-60`,
 );
 export default function PaletteDialog({
   className,
@@ -29,7 +29,7 @@ export default function PaletteDialog({
 
   const copyColor = (text: string) => {
     copyToClipboard(text).then(() => {
-      toast.success('Copied!', { position: 'top-right' });
+      toast.success('Copied!' + ' ' + text, { position: 'top-right' });
     });
   };
   return (
@@ -44,41 +44,43 @@ export default function PaletteDialog({
               <X size={18} className="cursor-pointer opacity-60 transition-opacity hover:opacity-100" />
             </DialogPrimitive.Close>
           </DialogPrimitive.Title>
-          <div className="mt-4 flex min-w-3xl overflow-x-auto">
-            <div className="relative top-5 mt-0.5 flex flex-col gap-1 pr-2">
-              {yColors.map((c) => (
-                <div className="flex h-10 items-center justify-end text-sm" key={c}>
-                  {c}
-                </div>
-              ))}
-            </div>
-            <div className="flex-1">
-              <div
-                className="mb-0.5 grid"
-                style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
-                {xTitles.map((t) => (
-                  <div className="flex justify-center text-sm" key={t}>
-                    {t}
+          <div className="mt-4 max-h-[74vh] overflow-auto">
+            <div className="flex min-w-3xl overflow-hidden">
+              <div className="relative top-5 mt-0.5 flex flex-col gap-1 pr-2">
+                {yColors.map((c) => (
+                  <div className="flex h-10 items-center justify-end text-sm" key={c}>
+                    {c}
                   </div>
                 ))}
               </div>
-              <div
-                className="grid gap-1"
-                style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
-                {Object.entries(color).map(([k, v]) => (
-                  <button
-                    key={k}
-                    className={cn(
-                      'group/palette h-10 origin-center text-xs text-black transition-transform active:scale-95',
-                      {
-                        'text-white': isDarkColor(v),
-                      },
-                    )}
-                    style={{ background: v }}
-                    onClick={() => copyColor(v)}>
-                    <span className="opacity-0 transition-opacity group-hover/palette:opacity-100">{v}</span>
-                  </button>
-                ))}
+              <div className="flex-1">
+                <div
+                  className="mb-0.5 grid"
+                  style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
+                  {xTitles.map((t) => (
+                    <div className="flex justify-center text-sm" key={t}>
+                      {t}
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className="grid gap-1"
+                  style={{ gridTemplateColumns: `repeat(${gradientLength + 1}, minmax(0, 1fr))` }}>
+                  {Object.entries(color).map(([k, v]) => (
+                    <button
+                      key={k}
+                      className={cn(
+                        'group/palette h-10 origin-center text-xs text-black transition-transform active:scale-95',
+                        {
+                          'text-white': isDarkColor(v),
+                        },
+                      )}
+                      style={{ background: v }}
+                      onClick={() => copyColor(v)}>
+                      <span className="opacity-0 transition-opacity group-hover/palette:opacity-100">{v}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
