@@ -92,8 +92,25 @@ export default function PaletteDialog({
 
 function parseColor(color: Record<string, string>) {
   const keys = Object.keys(color);
-  const xTitles = Array.from(new Set(keys.map((k) => k.split('-').at(-1))));
-  const yColors = Array.from(new Set(keys.map((k) => k.split('-').at(1))));
+  const xTitleArr = keys.map((k) => {
+    const temp = k.split('-');
+    // e.g ma-light-green-a-700
+    if (temp.length > 4) {
+      return temp.slice(-2).join('-');
+    }
+    return temp.at(-1);
+  });
+
+  const yColorsArr = keys.map((k) => {
+    const temp = k.split('-');
+    // e.g ma-light-green-a-700, ma-light-green-50, ma-green-a-700
+    if (temp.length > 3) {
+      return temp.slice(1, 3).join('-').replace(/-a$/, '');
+    }
+    return temp[1];
+  });
+  const yColors = Array.from(new Set(yColorsArr));
+  const xTitles = Array.from(new Set(xTitleArr));
 
   return { xTitles, yColors };
 }

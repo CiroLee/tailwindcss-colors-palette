@@ -42,8 +42,9 @@ npm run build:app
 ```
 
 ## Support Colors
-| Name           | Link                                                           | Status      |
-| -------------- | -------------------------------------------------------------- | ----------- |
-| universal      | [colar](https://github.com/fchristant/colar)                   | ✅ Completed |
-| ant design(v5) | [ant design](https://ant-design.antgroup.com/docs/spec/colors) | ✅ Completed |
-| Chakra         | [chakra](https://chakra-ui.com/docs/theming/colors)            | ✅ Completed |
+| Name           | Link                                                                   | Status      |
+| -------------- | ---------------------------------------------------------------------- | ----------- |
+| universal      | [colar](https://github.com/fchristant/colar)                           | ✅ Completed |
+| ant design(v5) | [ant design](https://ant-design.antgroup.com/docs/spec/colors)         | ✅ Completed |
+| Chakra         | [chakra](https://chakra-ui.com/docs/theming/colors)                    | ✅ Completed |
+| Material UI    | [material ui](https://www.figma.com/community/file/912837788133317724) | ✅ Completed |
