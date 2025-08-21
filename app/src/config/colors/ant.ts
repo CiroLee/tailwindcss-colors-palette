@@ -130,5 +130,3 @@ export const antColors = {
   "ant-magenta-9": "#780650",
   "ant-magenta-10": "#520339"
 } as const;
-
-export type antColorKeys = keyof typeof antColors;

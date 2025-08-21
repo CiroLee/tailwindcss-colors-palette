@@ -69,12 +69,9 @@ export default function PaletteDialog({
                   {Object.entries(color).map(([k, v]) => (
                     <button
                       key={k}
-                      className={cn(
-                        'group/palette lattice relative h-10 origin-center text-xs text-black transition-transform active:scale-95',
-                        {
-                          'text-white': isDarkColor(v),
-                        },
-                      )}
+                      className={cn('group/palette lattice relative h-10 origin-center text-xs text-black', {
+                        'text-white': isDarkColor(v),
+                      })}
                       style={{ backgroundColor: v }}
                       onClick={() => copyColor(v)}>
                       <span className="opacity-0 transition-opacity group-hover/palette:opacity-100">{v}</span>

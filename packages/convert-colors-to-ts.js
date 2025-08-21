@@ -41,12 +41,9 @@ function convertCssToTs(cssFilePath, tsFilePath) {
   const fileName = path.basename(tsFilePath, '.ts');
   const camelCaseName = toCamelCase(fileName);
   const variableName = camelCaseName.charAt(0) + camelCaseName.slice(1) + 'Colors';
-  const typeName = camelCaseName.charAt(0) + camelCaseName.slice(1) + 'ColorKeys';
 
   // 生成TypeScript内容
-  const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;
-
-export type ${typeName} = keyof typeof ${variableName};`;
+  const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;`;
 
   // 写入TypeScript文件
   fs.writeFileSync(tsFilePath, tsContent, 'utf-8');

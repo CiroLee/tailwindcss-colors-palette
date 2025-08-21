@@ -110,5 +110,3 @@ export const chakraColors = {
   "cha-orange-900": "#3b1106",
   "cha-orange-950": "#220a04"
 } as const;
-
-export type chakraColorKeys = keyof typeof chakraColors;
