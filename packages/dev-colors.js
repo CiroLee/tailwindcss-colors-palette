@@ -1,11 +1,11 @@
 /* eslint-env node */
-import fs from 'fs';
-import path from 'path';
 import { execSync } from 'child_process';
 import chokidar from 'chokidar';
+import fs from 'fs';
+import path from 'path';
 
 const colorsDir = path.resolve('./src/colors');
-const distDir = path.resolve('./dist/colors');// TypeScript转换目录
+const distDir = path.resolve('./dist/colors'); // TypeScript转换目录
 const targetDirInApp = path.resolve('../app/src/config/colors');
 
 // 确保目标目录存在
@@ -17,6 +17,13 @@ if (!fs.existsSync(targetDirInApp)) {
 if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
 // ===== CSS到TypeScript转换功能 =====
+
+// 将文件名转换为小驼峰命名
+const toCamelCase = (str) => {
+  return str
+    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
+    .replace(/^[A-Z]/, (char) => char.toLowerCase());
+};
 
 // 读取并转换CSS文件为TypeScript对象
 const convertCssToTs = (cssFilePath, tsFilePath) => {
@@ -33,10 +40,11 @@ const convertCssToTs = (cssFilePath, tsFilePath) => {
     colorObject[key] = value;
   }
 
-  // 从文件名获取变量名（首字母大写）
+  // 从文件名获取变量名 camelCase
   const fileName = path.basename(tsFilePath, '.ts');
-  const variableName = fileName.charAt(0) + fileName.slice(1) + 'Colors';
-  const typeName = fileName.charAt(0) + fileName.slice(1) + 'ColorKeys';
+  const camelCaseName = toCamelCase(fileName);
+  const variableName = camelCaseName.charAt(0).toLowerCase() + camelCaseName.slice(1) + 'Colors';
+  const typeName = camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1) + 'ColorKeys';
 
   // 生成TypeScript内容
   const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;
@@ -68,12 +76,12 @@ const processAllCssToTs = () => {
 const convertSingleCssToTs = (fileName) => {
   const baseName = path.basename(fileName, '.css');
   const cssFilePath = path.join(colorsDir, fileName);
-  
+
   if (!fs.existsSync(cssFilePath)) return;
-  
+
   // 只在app目录下的config目录中生成同名ts文件
   const tsFilePathInApp = path.join(targetDirInApp, `${baseName}.ts`);
-  
+
   // 转换并生成ts文件
   convertCssToTs(cssFilePath, tsFilePathInApp);
 };
@@ -101,13 +109,13 @@ const extractThemeContent = (cssContent) => {
   if (themeMatch) {
     return themeMatch[1].trim();
   }
-  
+
   // 如果没有@theme块，尝试匹配CSS变量
   const varMatches = cssContent.match(/--[^:;]+:[^;]+;/g);
   if (varMatches) {
     return varMatches.join('\n').trim();
   }
-  
+
   return '';
 };
 
@@ -115,7 +123,7 @@ const extractThemeContent = (cssContent) => {
 const buildThemeFile = (file) => {
   const inputPath = path.join(colorsDir, file);
   const outputPath = path.join(distDir, file);
-  
+
   console.log(`🔄 ${file}`);
   try {
     execSync(`npx postcss ${inputPath} -o ${outputPath} --verbose`, { stdio: 'inherit' });
@@ -135,19 +143,19 @@ const buildMainIndex = () => {
   const mainOutputPath = path.resolve('./dist/index.css');
 
   console.log('🔄 index.css');
-  
+
   try {
     const themeFiles = getThemeFiles();
-    
+
     // 读取原始入口文件内容
     let originalContent = '';
     if (fs.existsSync(mainInputPath)) {
       originalContent = fs.readFileSync(mainInputPath, 'utf8');
     }
-    
+
     // 提取原始内容中的@theme内容
     const originalThemeContent = extractThemeContent(originalContent);
-    
+
     // 收集所有色板文件的内容
     let allThemeContent = '';
     themeFiles.forEach((file) => {
@@ -160,7 +168,7 @@ const buildMainIndex = () => {
         }
       }
     });
-    
+
     // 合并所有内容到单个@theme块
     let combinedContent = '';
     if (originalThemeContent) {
@@ -168,16 +176,16 @@ const buildMainIndex = () => {
     } else {
       combinedContent = `@theme {\n${allThemeContent}\n}`;
     }
-    
+
     // 写入临时文件
     fs.writeFileSync(tempOutputPath, combinedContent);
-    
+
     // 构建最终文件（不压缩）
     execSync(`npx postcss ${tempOutputPath} -o ${mainOutputPath} --verbose`, { stdio: 'inherit' });
-    
+
     // 清理临时文件
     fs.unlinkSync(tempOutputPath);
-    
+
     const size = getFileSize(mainOutputPath);
     console.log(`  ✅ index.css · ${size}`);
     return true;
@@ -193,48 +201,48 @@ const buildMainIndex = () => {
 // 初始构建所有文件
 const initialBuild = () => {
   console.log('🚀 Initial development build...\n');
-  
+
   const themeFiles = getThemeFiles();
   let successCount = 0;
-  
+
   // 构建所有色板文件
   themeFiles.forEach((file) => {
     if (buildThemeFile(file)) {
       successCount++;
     }
   });
-  
+
   // 构建主入口文件
   if (buildMainIndex()) {
     successCount++;
   }
-  
+
   // 执行TypeScript转换
   console.log('\n🔄 开始转换CSS文件到TypeScript对象...');
   processAllCssToTs();
   console.log('🎉 TypeScript文件转换完成！');
-  
+
   console.log(`\n🎉 Built ${successCount}/${themeFiles.length + 1} files`);
 };
 
 // 启动文件监听
 const startWatching = () => {
   console.log('\n👀 Watching for changes...\n');
-  
+
   // 监听色板文件变化
   const colorsWatcher = chokidar.watch(`${colorsDir}/**/*.css`, {
     ignored: /[/\\]\./,
     persistent: true,
-    ignoreInitial: true
+    ignoreInitial: true,
   });
-  
+
   // 监听主入口文件变化
   const mainWatcher = chokidar.watch('./src/index.css', {
     ignored: /[/\\]\./,
     persistent: true,
-    ignoreInitial: true
+    ignoreInitial: true,
   });
-  
+
   // 色板文件变化处理
   colorsWatcher.on('change', (filePath) => {
     const fileName = path.basename(filePath);
@@ -243,14 +251,14 @@ const startWatching = () => {
     buildMainIndex(); // 重新构建主入口文件
     convertSingleCssToTs(fileName); // 转换TypeScript
   });
-  
+
   // 主入口文件变化处理
   mainWatcher.on('change', () => {
     console.log('\n📝 index.css changed');
     buildMainIndex();
     processAllCssToTs(); // 重新转换所有TypeScript文件
   });
-  
+
   // 新增文件处理
   colorsWatcher.on('add', (filePath) => {
     const fileName = path.basename(filePath);
@@ -261,30 +269,30 @@ const startWatching = () => {
       convertSingleCssToTs(fileName); // 转换TypeScript
     }
   });
-  
+
   // 删除文件处理
   colorsWatcher.on('unlink', (filePath) => {
     const fileName = path.basename(filePath);
     console.log(`\n🗑️  ${fileName} removed`);
-    
+
     // 删除对应的dist文件
     const distFilePath = path.join(distDir, fileName);
     if (fs.existsSync(distFilePath)) {
       fs.unlinkSync(distFilePath);
     }
-    
+
     // 删除对应的TypeScript文件
     const baseName = path.basename(fileName, '.css');
     const tsFilePathInApp = path.join(targetDirInApp, `${baseName}.ts`);
-    
+
     if (fs.existsSync(tsFilePathInApp)) {
       fs.unlinkSync(tsFilePathInApp);
       console.log(`🗑️  已删除: ${tsFilePathInApp}`);
     }
-    
+
     buildMainIndex(); // 重新构建主入口文件
   });
-  
+
   console.log('🎯 Watching:');
   console.log(`  ${colorsDir}/*.css`);
   console.log(`  ./src/index.css`);
@@ -295,7 +303,7 @@ const startWatching = () => {
 const main = () => {
   const args = process.argv.slice(2);
   const command = args[0];
-  
+
   if (command === '--watch' || command === '-w') {
     // 先执行初始构建，然后启动监听
     initialBuild();

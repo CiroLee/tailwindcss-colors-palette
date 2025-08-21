@@ -14,7 +14,7 @@ interface PaletteDialogProps extends React.ComponentPropsWithRef<typeof DialogPr
 
 const content = cn(
   `relative data-[state=open]:animate-scale-in data-[state=closed]:animate-scale-out fixed top-1/2 left-1/2 origin-center -translate-1/2 rounded-md border border-neutral-800 
-  bg-neutral-900 p-3 w-[calc(100vw_-_var(--spacing)*2)] md:w-[90%] md:max-w-220 overflow-hidden z-60`,
+  bg-neutral-900 p-3 w-[calc(100vw_-_var(--spacing)*2)] md:w-[90%] md:max-w-300 overflow-hidden z-60`,
 );
 export default function PaletteDialog({
   className,
@@ -70,12 +70,12 @@ export default function PaletteDialog({
                     <button
                       key={k}
                       className={cn(
-                        'group/palette h-10 origin-center text-xs text-black transition-transform active:scale-95',
+                        'group/palette lattice relative h-10 origin-center text-xs text-black transition-transform active:scale-95',
                         {
                           'text-white': isDarkColor(v),
                         },
                       )}
-                      style={{ background: v }}
+                      style={{ backgroundColor: v }}
                       onClick={() => copyColor(v)}>
                       <span className="opacity-0 transition-opacity group-hover/palette:opacity-100">{v}</span>
                     </button>

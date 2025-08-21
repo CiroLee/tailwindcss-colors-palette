@@ -8,12 +8,20 @@ interface PaletteCardProps {
   brandName?: string;
   middle: string;
   gradientLength: number;
+  diffStep?: number;
   onClick?: (paletteName: string, brandName?: string) => void;
 }
 
 const minBlockNum = 12;
 
-export default function PaletteCard({ paletteName, brandName, middle, gradientLength, onClick }: PaletteCardProps) {
+export default function PaletteCard({
+  paletteName,
+  brandName,
+  middle,
+  diffStep = 4,
+  gradientLength,
+  onClick,
+}: PaletteCardProps) {
   const name = paletteName + 'Colors';
   const colorPalette = colors[name as keyof typeof colors];
   const pickColor = useCallback(() => {
@@ -26,12 +34,12 @@ export default function PaletteCard({ paletteName, brandName, middle, gradientLe
     // 如果不足12个，从末尾挑选补充
     if (colorsArr.length < minBlockNum) {
       const diff = minBlockNum - colorsArr.length;
-      for (let i = Object.values(colorPalette).length; i > diff; i -= 3) {
+      for (let i = Object.values(colorPalette).length; i > diff; i -= diffStep) {
         colorsArr.push(Object.values(colorPalette)[i]);
       }
     }
     return colorsArr;
-  }, [middle, colorPalette]);
+  }, [middle, diffStep, colorPalette]);
   return (
     <div
       className={cn(

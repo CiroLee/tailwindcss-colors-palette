@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-colors-palette",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A color palette plugin for Tailwind CSS 4, providing easy-to-use color palettes for your projects",
   "type": "module",
   "main": "dist/index.css",
@@ -15,7 +15,9 @@
     "./colors/ant.css": "./dist/colors/ant.css",
     "./colors/universal.css": "./dist/colors/universal.css",
     "./colors/chakra.css": "./dist/colors/chakra.css",
-    "./colors/material.css": "./dist/colors/material.css"
+    "./colors/material.css": "./dist/colors/material.css",
+    "./colors/radix-light.css": "./dist/colors/radix-light.css",
+    "./colors/radix-dark.css": "./dist/colors/radix-dark.css"
   },
   "keywords": [
     "tailwindcss",
