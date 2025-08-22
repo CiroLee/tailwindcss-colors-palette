@@ -234,5 +234,3 @@ export const universalColors = {
   "uni-jungle-11": "#516605",
   "uni-jungle-12": "#3d4d04"
 } as const;
-
-export type universalColorKeys = keyof typeof universalColors;

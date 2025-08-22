@@ -252,5 +252,3 @@ export const materialColors = {
   "ma-amber-a-200": "#ffd740",
   "ma-amber-a-100": "#ffe57f"
 } as const;
-
-export type materialColorKeys = keyof typeof materialColors;

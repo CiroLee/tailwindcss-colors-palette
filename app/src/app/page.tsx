@@ -46,6 +46,31 @@ export default function Page() {
         <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradientLength={9} />
         <PaletteCard paletteName="chakra" brandName="Chakra" middle="500" gradientLength={10} />
         <PaletteCard paletteName="material" brandName="Material" middle="600" gradientLength={13} />
+        <PaletteCard paletteName="radixLight" brandName="Radix Light" middle="13" gradientLength={11} />
+        <PaletteCard
+          paletteName="radixDark"
+          brandName="Radix Dark"
+          middle="13"
+          excludeColorNames={['dark']}
+          diffStep={10}
+          gradientLength={11}
+        />
+        <PaletteCard
+          paletteName="radixAlphaLight"
+          brandName="Radix Alpha Light"
+          middle="13"
+          diffStep={10}
+          excludeColorNames={['alpha']}
+          gradientLength={11}
+        />
+        <PaletteCard
+          paletteName="radixAlphaDark"
+          brandName="Radix Alpha Dark"
+          middle="13"
+          diffStep={10}
+          excludeColorNames={['alpha', 'dark']}
+          gradientLength={11}
+        />
       </div>
       <div
         className="fixed inset-0 -z-1"

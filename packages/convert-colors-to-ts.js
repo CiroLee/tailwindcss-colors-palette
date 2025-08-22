@@ -2,6 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// 将文件名转换为小驼峰命名
+const toCamelCase = (str) => {
+  return str
+    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
+    .replace(/^[A-Z]/, (char) => char.toLowerCase());
+};
+
 // 获取当前目录路径
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,15 +37,13 @@ function convertCssToTs(cssFilePath, tsFilePath) {
     colorObject[key] = value;
   }
 
-  // 从文件名获取变量名（首字母大写）
+  // 从文件名获取变量名 camelCase
   const fileName = path.basename(tsFilePath, '.ts');
-  const variableName = fileName.charAt(0) + fileName.slice(1) + 'Colors';
-  const typeName = fileName.charAt(0) + fileName.slice(1) + 'ColorKeys';
+  const camelCaseName = toCamelCase(fileName);
+  const variableName = camelCaseName.charAt(0) + camelCaseName.slice(1) + 'Colors';
 
   // 生成TypeScript内容
-  const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;
-
-export type ${typeName} = keyof typeof ${variableName};`;
+  const tsContent = `export const ${variableName} = ${JSON.stringify(colorObject, null, 2)} as const;`;
 
   // 写入TypeScript文件
   fs.writeFileSync(tsFilePath, tsContent, 'utf-8');

@@ -8,12 +8,22 @@ interface PaletteCardProps {
   brandName?: string;
   middle: string;
   gradientLength: number;
+  diffStep?: number;
+  excludeColorNames?: string[];
   onClick?: (paletteName: string, brandName?: string) => void;
 }
 
 const minBlockNum = 12;
 
-export default function PaletteCard({ paletteName, brandName, middle, gradientLength, onClick }: PaletteCardProps) {
+export default function PaletteCard({
+  paletteName,
+  brandName,
+  middle,
+  diffStep = 4,
+  gradientLength,
+  excludeColorNames = [],
+  onClick,
+}: PaletteCardProps) {
   const name = paletteName + 'Colors';
   const colorPalette = colors[name as keyof typeof colors];
   const pickColor = useCallback(() => {
@@ -26,12 +36,12 @@ export default function PaletteCard({ paletteName, brandName, middle, gradientLe
     // 如果不足12个，从末尾挑选补充
     if (colorsArr.length < minBlockNum) {
       const diff = minBlockNum - colorsArr.length;
-      for (let i = Object.values(colorPalette).length; i > diff; i -= 3) {
+      for (let i = Object.values(colorPalette).length; i > diff; i -= diffStep) {
         colorsArr.push(Object.values(colorPalette)[i]);
       }
     }
     return colorsArr;
-  }, [middle, colorPalette]);
+  }, [middle, diffStep, colorPalette]);
   return (
     <div
       className={cn(
@@ -41,14 +51,15 @@ export default function PaletteCard({ paletteName, brandName, middle, gradientLe
         {pickColor().map((color, i) => (
           <li key={i} className="palette-block h-12 origin-center" style={{ background: color }}></li>
         ))}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:opacity-100 md:opacity-0">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition group-hover:opacity-100 md:opacity-0">
           <PaletteDialog
             title={brandName}
             color={colorPalette}
             gradientLength={gradientLength}
+            excludeColorNames={excludeColorNames}
             trigger={
               <button
-                className="h-8 cursor-pointer rounded-full bg-black/40 px-4 backdrop-blur-2xl transition-opacity group-hover:opacity-100 md:opacity-0"
+                className="h-8 cursor-pointer rounded-full bg-black/60 px-4 inset-shadow-[0_0.5px_0_rgba(255,255,255,0.4)] transition-opacity group-hover:opacity-100 md:opacity-0"
                 onClick={() => onClick?.(paletteName, brandName)}>
                 View
               </button>
