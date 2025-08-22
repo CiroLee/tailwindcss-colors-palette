@@ -370,17 +370,5 @@ export const radixDarkColors = {
   "ra-orange-dark-9": "#f76b15",
   "ra-orange-dark-10": "#ff801f",
   "ra-orange-dark-11": "#ffa057",
-  "ra-orange-dark-12": "#ffe0c2",
-  "ra-alpha-dark-1": "rgba(0, 0, 0, 0.05)",
-  "ra-alpha-dark-2": "rgba(0, 0, 0, 0.1)",
-  "ra-alpha-dark-3": "rgba(0, 0, 0, 0.15)",
-  "ra-alpha-dark-4": "rgba(0, 0, 0, 0.2)",
-  "ra-alpha-dark-5": "rgba(0, 0, 0, 0.3)",
-  "ra-alpha-dark-6": "rgba(0, 0, 0, 0.4)",
-  "ra-alpha-dark-7": "rgba(0, 0, 0, 0.5)",
-  "ra-alpha-dark-8": "rgba(0, 0, 0, 0.6)",
-  "ra-alpha-dark-9": "rgba(0, 0, 0, 0.7)",
-  "ra-alpha-dark-10": "rgba(0, 0, 0, 0.8)",
-  "ra-alpha-dark-11": "rgba(0, 0, 0, 0.9)",
-  "ra-alpha-dark-12": "rgba(0, 0, 0, 0.95)"
+  "ra-orange-dark-12": "#ffe0c2"
 } as const;

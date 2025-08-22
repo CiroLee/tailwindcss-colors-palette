@@ -9,6 +9,7 @@ interface PaletteCardProps {
   middle: string;
   gradientLength: number;
   diffStep?: number;
+  excludeColorNames?: string[];
   onClick?: (paletteName: string, brandName?: string) => void;
 }
 
@@ -20,6 +21,7 @@ export default function PaletteCard({
   middle,
   diffStep = 4,
   gradientLength,
+  excludeColorNames = [],
   onClick,
 }: PaletteCardProps) {
   const name = paletteName + 'Colors';
@@ -49,14 +51,15 @@ export default function PaletteCard({
         {pickColor().map((color, i) => (
           <li key={i} className="palette-block h-12 origin-center" style={{ background: color }}></li>
         ))}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:opacity-100 md:opacity-0">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition group-hover:opacity-100 md:opacity-0">
           <PaletteDialog
             title={brandName}
             color={colorPalette}
             gradientLength={gradientLength}
+            excludeColorNames={excludeColorNames}
             trigger={
               <button
-                className="h-8 cursor-pointer rounded-full bg-black/40 px-4 backdrop-blur-2xl transition-opacity group-hover:opacity-100 md:opacity-0"
+                className="h-8 cursor-pointer rounded-full bg-black/60 px-4 inset-shadow-[0_0.5px_0_rgba(255,255,255,0.4)] transition-opacity group-hover:opacity-100 md:opacity-0"
                 onClick={() => onClick?.(paletteName, brandName)}>
                 View
               </button>

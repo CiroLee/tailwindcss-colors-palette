@@ -370,17 +370,5 @@ export const radixLightColors = {
   "ra-orange-9": "#f76b15",
   "ra-orange-10": "#ef5f00",
   "ra-orange-11": "#cc4e00",
-  "ra-orange-12": "#582d1d",
-  "ra-alpha-1": "rgba(255, 255, 255, 0.05)",
-  "ra-alpha-2": "rgba(255, 255, 255, 0.1)",
-  "ra-alpha-3": "rgba(255, 255, 255, 0.15)",
-  "ra-alpha-4": "rgba(255, 255, 255, 0.2)",
-  "ra-alpha-5": "rgba(255, 255, 255, 0.3)",
-  "ra-alpha-6": "rgba(255, 255, 255, 0.4)",
-  "ra-alpha-7": "rgba(255, 255, 255, 0.5)",
-  "ra-alpha-8": "rgba(255, 255, 255, 0.6)",
-  "ra-alpha-9": "rgba(255, 255, 255, 0.7)",
-  "ra-alpha-10": "rgba(255, 255, 255, 0.8)",
-  "ra-alpha-11": "rgba(255, 255, 255, 0.9)",
-  "ra-alpha-12": "rgba(255, 255, 255, 0.95)"
+  "ra-orange-12": "#582d1d"
 } as const;
