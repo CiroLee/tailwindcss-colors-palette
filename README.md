@@ -48,3 +48,4 @@ npm run build:app
 | ant design(v5) | [ant design](https://ant-design.antgroup.com/docs/spec/colors)         | ✅ Completed |
 | Chakra         | [chakra](https://chakra-ui.com/docs/theming/colors)                    | ✅ Completed |
 | Material UI    | [material ui](https://www.figma.com/community/file/912837788133317724) | ✅ Completed |
+| Radix Colors   | [radix colors](https://www.radix-ui.com/colors)                        | ✅ Completed |
