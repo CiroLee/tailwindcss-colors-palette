@@ -49,4 +49,4 @@ npm run build:app
 | Chakra         | [chakra](https://chakra-ui.com/docs/theming/colors)                    | ✅ Completed |
 | Material UI    | [material ui](https://www.figma.com/community/file/912837788133317724) | ✅ Completed |
 | Radix Colors   | [radix colors](https://www.radix-ui.com/colors)                        | ✅ Completed |
-| Nuxt UI v4     | [next ui](https://www.figma.com/community/file/1544369209862884086)    | ✅ Completed |
+| Nuxt UI v4     | [nuxt ui](https://www.figma.com/community/file/1544369209862884086)    | ✅ Completed |
