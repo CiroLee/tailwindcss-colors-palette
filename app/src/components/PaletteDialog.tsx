@@ -4,9 +4,12 @@ import Color from 'color';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import CodeBox from './CodeBox';
+import CopyButton from './CopyButton';
 interface PaletteDialogProps extends React.ComponentPropsWithRef<typeof DialogPrimitive.Root> {
   className?: string;
   title?: string;
+  code?: string;
   color: Record<string, string>;
   trigger?: React.ReactNode;
   gradientLength: number;
@@ -22,6 +25,7 @@ export default function PaletteDialog({
   trigger,
   title,
   color,
+  code,
   gradientLength,
   excludeColorNames = [],
   ...props
@@ -55,12 +59,22 @@ export default function PaletteDialog({
         <DialogPrimitive.Overlay className="data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out fixed inset-0 bg-black/60 backdrop-blur-md" />
         <DialogPrimitive.Content className={cn(content, className)}>
           <DialogPrimitive.Title className="flex items-center justify-between text-lg font-semibold">
-            <span>{title}</span>
+            <div className="flex items-center gap-3">
+              <span>{title}</span>
+              <div className="relative flex items-center gap-2 overflow-hidden rounded-md pr-1 ring-2 ring-neutral-800">
+                <CodeBox
+                  lang="css"
+                  className="flex-1 [&_pre]:py-1.5"
+                  code={`@import "tailwindcss-colors-palette/colors/${code}";`}
+                />
+                <CopyButton text={`@import "tailwindcss-colors-palette/colors/${code}";`} />
+              </div>
+            </div>
             <DialogPrimitive.Close asChild>
               <X size={18} className="cursor-pointer opacity-60 transition-opacity hover:opacity-100" />
             </DialogPrimitive.Close>
           </DialogPrimitive.Title>
-          <div className="mt-4 max-h-[74vh] overflow-auto">
+          <div className="mt-6 max-h-[74vh] overflow-auto">
             <div className="flex min-w-3xl overflow-hidden">
               <div className="relative top-5 mt-0.5 flex flex-col gap-1 pr-2">
                 {yColors.map((c) => (

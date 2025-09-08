@@ -1,6 +1,7 @@
 export * from './ant';
 export * from './chakra';
 export * from './material';
+export * from './nuxt';
 export * from './radix-alpha-dark';
 export * from './radix-alpha-light';
 export * from './radix-dark';

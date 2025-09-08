@@ -42,11 +42,23 @@ export default function Page() {
         Palettes
       </Heading>
       <div className="mx-auto grid gap-4 px-4 pb-20 md:grid-cols-4 lg:max-w-6xl">
-        <PaletteCard paletteName="universal" brandName="Universal" middle="5" gradientLength={12} />
-        <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradientLength={9} />
-        <PaletteCard paletteName="chakra" brandName="Chakra" middle="500" gradientLength={10} />
-        <PaletteCard paletteName="material" brandName="Material" middle="600" gradientLength={13} />
-        <PaletteCard paletteName="radixLight" brandName="Radix Light" middle="13" gradientLength={11} />
+        <PaletteCard
+          paletteName="universal"
+          brandName="Universal"
+          middle="5"
+          gradientLength={12}
+          code="universal.css"
+        />
+        <PaletteCard paletteName="ant" brandName="Ant Design" middle="6" gradientLength={9} code="ant.css" />
+        <PaletteCard paletteName="chakra" brandName="Chakra" middle="500" gradientLength={10} code="chakra.css" />
+        <PaletteCard paletteName="material" brandName="Material" middle="600" gradientLength={13} code="material.css" />
+        <PaletteCard
+          paletteName="radixLight"
+          brandName="Radix Light"
+          middle="13"
+          gradientLength={11}
+          code="radix-light.css"
+        />
         <PaletteCard
           paletteName="radixDark"
           brandName="Radix Dark"
@@ -54,6 +66,7 @@ export default function Page() {
           excludeColorNames={['dark']}
           diffStep={10}
           gradientLength={11}
+          code="radix-dark.css"
         />
         <PaletteCard
           paletteName="radixAlphaLight"
@@ -62,6 +75,7 @@ export default function Page() {
           diffStep={10}
           excludeColorNames={['alpha']}
           gradientLength={11}
+          code="radix-alpha-light.css"
         />
         <PaletteCard
           paletteName="radixAlphaDark"
@@ -70,7 +84,9 @@ export default function Page() {
           diffStep={10}
           excludeColorNames={['alpha', 'dark']}
           gradientLength={11}
+          code="radix-alpha-dark.css"
         />
+        <PaletteCard paletteName="nuxt" brandName="Nuxt" middle="5" gradientLength={10} code="nuxt.css" />
       </div>
       <div
         className="fixed inset-0 -z-1"

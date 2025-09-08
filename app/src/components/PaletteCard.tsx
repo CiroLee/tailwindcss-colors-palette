@@ -9,6 +9,7 @@ interface PaletteCardProps {
   middle: string;
   gradientLength: number;
   diffStep?: number;
+  code?: string;
   excludeColorNames?: string[];
   onClick?: (paletteName: string, brandName?: string) => void;
 }
@@ -21,6 +22,7 @@ export default function PaletteCard({
   middle,
   diffStep = 4,
   gradientLength,
+  code,
   excludeColorNames = [],
   onClick,
 }: PaletteCardProps) {
@@ -56,6 +58,7 @@ export default function PaletteCard({
             title={brandName}
             color={colorPalette}
             gradientLength={gradientLength}
+            code={code}
             excludeColorNames={excludeColorNames}
             trigger={
               <button
