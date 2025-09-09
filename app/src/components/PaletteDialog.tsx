@@ -61,7 +61,7 @@ export default function PaletteDialog({
           <DialogPrimitive.Title className="flex items-center justify-between text-lg font-semibold">
             <div className="flex items-center gap-3">
               <span>{title}</span>
-              <div className="relative flex items-center gap-2 overflow-hidden rounded-md pr-1 ring-2 ring-neutral-800">
+              <div className="relative hidden items-center overflow-hidden rounded-md ring-2 ring-neutral-800 md:flex">
                 <CodeBox
                   lang="css"
                   className="flex-1 [&_pre]:py-1.5"
